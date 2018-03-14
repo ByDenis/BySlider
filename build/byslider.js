@@ -58,12 +58,19 @@
 	 * @author ByDenis / https://github.com/ByDenis/
 	 */
 	class Slider {
-	    
 	    constructor(element, options) {
-	      //  this.selector = selector;
-	        this._name='empty name';
-	        console.log("init");
+	        let $element = $(element);
+
+	        if ($element.hasClass("ishide")) {
+	            $element.fadeIn(1000);
+	            $element.removeClass("ishide");
+	        } else {
+	            $element.fadeOut(1000);
+	            $element.addClass("ishide");
+	        }
 	    }
+
+
 	    set name(value) {
 	        this._name=value;
 	    }
