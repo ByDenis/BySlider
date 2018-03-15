@@ -7,6 +7,6 @@ import $ from 'jquery';
 
 Slider.DEFAULTS = {};
 
-plugin('slider', Slider,true);
+plugin('slider', Slider, true);
 
 //export {new_slider};
