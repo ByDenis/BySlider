@@ -6,14 +6,25 @@ import $ from 'jquery';
 class Slider {
     constructor(element, options) {
         let $element = $(element);
+       // let obj_name='byslider'+time();
+       // const [obj_name]=this;
+       // $(element).data("objname",obj_name);
+       console.log('init');
+        //вызываем событие
+        var event = new CustomEvent("sliderload");
+        element.dispatchEvent(event);
+    }
 
-        if ($element.hasClass("ishide")) {
-            $element.fadeIn(1000);
-            $element.removeClass("ishide");
-        } else {
-            $element.fadeOut(1000);
-            $element.addClass("ishide")
-        }
+    next() {
+        console.log("next");
+    }
+
+    prev() {
+        console.log("prev");
+    }
+    
+    filt(id) {
+        console.log(id);
     }
 
 

@@ -9,6 +9,15 @@
     </style>
 </head>
 <body>
-    <span class="Slider">slider data</span>
+    <span class="Slider" data-bySlider="next">slider data</span>
+    <span class="Slider">slider data1</span>
+    <script>
+        $('.Slider').on("sliderload",function() {
+            alert('is_init');
+        });
+       // $('.Slider').bySlider();
+        
+    </script>
+
 </body>
 </html>

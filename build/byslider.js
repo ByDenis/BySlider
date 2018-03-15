@@ -29,7 +29,7 @@
 	    let dataName = `__${pluginName}`;
 	    let old = $.fn[pluginName];
 
-	    $.fn[pluginName] = function (option) {
+	    $.fn[pluginName] = function (option,value) {
 	        return this.each(function () {
 	            let $this = $(this);
 	            let data = $this.data(dataName);
@@ -40,7 +40,9 @@
 	            }
 
 	            if (typeof option === 'string') {
-	                data[option]();
+	                if (value) data[option](value);
+	                else data[option]();
+	               
 	            }
 	        });
 	    };
@@ -60,14 +62,25 @@
 	class Slider {
 	    constructor(element, options) {
 	        let $element = $(element);
+	       // let obj_name='byslider'+time();
+	       // const [obj_name]=this;
+	       // $(element).data("objname",obj_name);
+	       console.log('init');
+	        //вызываем событие
+	        var event = new CustomEvent("sliderload");
+	        element.dispatchEvent(event);
+	    }
 
-	        if ($element.hasClass("ishide")) {
-	            $element.fadeIn(1000);
-	            $element.removeClass("ishide");
-	        } else {
-	            $element.fadeOut(1000);
-	            $element.addClass("ishide");
-	        }
+	    next() {
+	        console.log("next");
+	    }
+
+	    prev() {
+	        console.log("prev");
+	    }
+	    
+	    filt(id) {
+	        console.log(id);
 	    }
 
 
@@ -84,7 +97,7 @@
 
 	Slider.DEFAULTS = {};
 
-	plugin('slider', Slider,true);
+	plugin('bySlider', Slider);
 
 	//export {new_slider};
 
