@@ -6,25 +6,6 @@
 
 	$ = $ && $.hasOwnProperty('default') ? $['default'] : $;
 
-	/**
-	 * Generate a jQuery plugin
-	 * @param pluginName [string] Plugin name
-	 * @param className [object] Class of the plugin
-	 * @param shortHand [bool] Generate a shorthand as $.pluginName
-	 *
-	 * @example
-	 * import plugin from 'plugin';
-	 *
-	 * class MyPlugin {
-	 *     constructor(element, options) {
-	 *         // ...
-	 *     }
-	 * }
-	 *
-	 * MyPlugin.DEFAULTS = {};
-	 *
-	 * plugin('myPlugin', MyPlugin');
-	 */
 	function plugin(pluginName, className, shortHand = false) {
 	    let dataName = `__${pluginName}`;
 	    let old = $.fn[pluginName];
@@ -42,7 +23,6 @@
 	            if (typeof option === 'string') {
 	                if (value) data[option](value);
 	                else data[option]();
-	               
 	            }
 	        });
 	    };
@@ -62,13 +42,18 @@
 	class Slider {
 	    constructor(element, options) {
 	        let $element = $(element);
+	        this.__element = element;
 	       // let obj_name='byslider'+time();
 	       // const [obj_name]=this;
 	       // $(element).data("objname",obj_name);
-	       console.log('init');
+	       
 	        //вызываем событие
-	        var event = new CustomEvent("sliderload");
-	        element.dispatchEvent(event);
+	        this._addEvent("onLoad");
+	    }
+
+	    _addEvent(e_name) {
+	        let event = new CustomEvent(e_name);
+	        this.__element.dispatchEvent(event);
 	    }
 
 	    next() {
@@ -83,13 +68,6 @@
 	        console.log(id);
 	    }
 
-
-	    set name(value) {
-	        this._name=value;
-	    }
-	    get name() {
-	        return this._name;
-	    }
 	}
 
 	//var new_slider=new Slider("test");

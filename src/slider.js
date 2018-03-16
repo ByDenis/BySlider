@@ -5,14 +5,19 @@ import $ from 'jquery';
 'use strict';
 class Slider {
     constructor(element, options) {
-        let $element = $(element);
+        this.$element = $(element);
+        this.__element = element;
        // let obj_name='byslider'+time();
        // const [obj_name]=this;
        // $(element).data("objname",obj_name);
-       console.log('init');
+       
         //вызываем событие
-        var event = new CustomEvent("sliderload");
-        element.dispatchEvent(event);
+        this._addEvent("onLoad");
+    }
+
+    _addEvent(e_name) {
+        let event = new CustomEvent(e_name);
+        this.__element.dispatchEvent(event);
     }
 
     next() {
@@ -27,13 +32,6 @@ class Slider {
         console.log(id);
     }
 
-
-    set name(value) {
-        this._name=value;
-    }
-    get name() {
-        return this._name;
-    }
 }
 
 export { Slider };
