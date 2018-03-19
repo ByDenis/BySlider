@@ -1,6 +1,6 @@
 {
   "name": "byslider",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A simple class for creating a unique slider",
   "main": "src/main.js",
   "repository": "https://github.com/ByDenis/BySlider.git",
@@ -14,6 +14,7 @@
   ],
   "scripts": {
     "build": "rollup -c",
+    "build-uglify": "rollup -c && uglifyjs build/byslider.js -cm --preamble build/byslider.min.js",
     "start": "npm run dev"
   },
   "dependencies": {

@@ -3,19 +3,78 @@
 <head>
     <title>demo</title>
     <meta charset="utf-8">
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="./_js/jquery.js"></script>
     <script src="../build/byslider.js"></script>
     <style>
     </style>
 </head>
 <body>
-    <span class="Slider">slider data</span>
-    <span class="Slider">slider data1</span>
+    <a data-byslider="filt" data-type='all' href="#filt1">all show</a>
+    <a data-byslider="filt" data-type='1' href="#filt1">filt1</a>
+    <a data-byslider="filt" data-type='2' href="#filt2">filt2</a>
+    <a data-byslider="filt" data-type='3' href="#filt3">filt3</a>
+
+    <a data-byslider="next" href="#next">next</a>
+    <a data-byslider="prev" href="#prev">prev</a>
+  
+    <ul data-byslider="init" id="bySlider">
+        <li data-type="1">
+            <div class="slide">
+                <p>1</p>
+                <img data-src="https://www.degoudreinet.nl/uploads/img/afbeelding_27-01-2016_10-28_385x383.jpg" src='' />
+            </div>
+        </li>
+        <li data-type="1">
+            <div class="slide">
+                <p>2</p>
+                <img data-src="https://www.firebirdsql.org/file/about/ds-firebird-logo-400.png" src='' />
+            </div>
+        </li>
+        <li data-type="2">
+            <div class="slide">
+                <p>3</p>    
+                <img data-src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7QPYmJj6V9_A4xmIzEHQqtsLyuoZNTk4vwZu1z4DGsNsftPAp" src='' />
+            </div>
+        </li>
+        <li data-type="2">
+            <div class="slide">
+                <p>4</p>    
+            </div>
+        </li>
+        <li data-type="2">
+            <div class="slide">
+                <p>5</p>    
+            </div>
+        </li>
+        <li data-type="3">
+            <div class="slide">
+                <p>6</p> 
+            </div>
+        </li>
+        <li data-type="3">
+            <div class="slide">
+                <p>7</p> 
+            </div>
+        </li>
+        <li data-type="3">
+            <div class="slide">
+                <p>8</p> 
+            </div>
+        </li>
+        <li data-type="3">
+            <div class="slide">
+                <p>9</p> 
+            </div>
+        </li>
+    </ul>
     <script>
-        $('.Slider').on("onLoad",function() {
-            alert('init');
+        $('#bySlider').on("onLoad",function() {
+          
         });
-        $('.Slider').bySlider();
+        $('#bySlider').on("onNext",function() {
+            
+        });
+        $('ul[data-byslider="init"]').bySlider();
         
     </script>
 
