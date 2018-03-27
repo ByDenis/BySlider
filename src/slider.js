@@ -54,16 +54,29 @@ class Slider {
         this.$element.find(">li").removeClass('bycurrent');
         this.$element.find(">li").removeClass('bynext');
         this.$element.find(">li").removeClass('byprev');
-
+        
         this.$element.find(this._indexElement).eq(this._cIndex).addClass('bycurrent');
         for(let q=1;q<=this.npShow;q++) {
+            this.$element.find(">li").removeClass('bynext-'+q);
+            this.$element.find(">li").removeClass('byprev-'+q);
+
             let tmp_next=this._cIndex+q;
             if(tmp_next>=this._maxIndex) tmp_next=tmp_next-this._maxIndex;
-            this.$element.find(this._indexElement).eq(tmp_next).addClass('bynext');
+            if(!this.$element.find(this._indexElement).eq(tmp_next).hasClass('bycurrent') 
+            && !this.$element.find(this._indexElement).eq(tmp_next).hasClass('byprev') )
+            {
+                this.$element.find(this._indexElement).eq(tmp_next).addClass('bynext');
+                this.$element.find(this._indexElement).eq(tmp_next).addClass('bynext-'+q);
+            }
 
             let tmp_prev=this._cIndex-q;
             if(tmp_prev<0) tmp_prev=this._maxIndex+tmp_prev;
-            this.$element.find(this._indexElement).eq(tmp_prev).addClass('byprev');
+            if(!this.$element.find(this._indexElement).eq(tmp_prev).hasClass('bycurrent') 
+            && !this.$element.find(this._indexElement).eq(tmp_prev).hasClass('bynext') ) 
+            {
+                this.$element.find(this._indexElement).eq(tmp_prev).addClass('byprev');
+                this.$element.find(this._indexElement).eq(tmp_prev).addClass('byprev-'+q);
+            }
         }
     }
 
