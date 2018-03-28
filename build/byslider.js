@@ -41,14 +41,16 @@
 	 */
 	class Slider {
 	    constructor(element, options) {
-	        this.npShow=2;
-	        this.imgPreload=true;
+	        this.npShow=options.npshow || 2;
+	        this.isClear=options.isсlear || false;
+	        this.imgPreload=options.imgpreload || true;
 	        this.$element = $(element);
 	        this.__element = element;
 	        this._cIndex=0;
 	        this._indexElement=">li:not('.byhide')";
 
-	        this._maxIndex=this.$element.find(this._indexElement).length;
+	        console.log(this.isClear);
+	        this._jpattern=options.jpattern || "<li>undefined</li>";
 	        
 	        $('[data-byslider]').on("click",(e)=>{
 	            let $this = $(e.currentTarget);
@@ -57,6 +59,60 @@
 	                this[$this.data('byslider')](e);
 	            }
 	        });
+
+	        if (typeof options.jload!=="undefined") {
+	            this._jget(options.jload).then(
+	                result => {
+	                    if (this.isClear) $('[data-byslider=init]').html("");
+	                    $(result).each((index,elemnt) => {
+	                        $('[data-byslider=init]').append(this._parseTpl(this._jpattern,elemnt));
+	                    });
+	                    
+	                    this._addImgPreloader();
+	                    this._setIndex();
+	                },
+	                error => {
+	                    console.error(error);
+
+	                    this._addImgPreloader();
+	                    this._setIndex();
+	                }
+	            );
+	        } else {
+	            this._addImgPreloader();
+	            this._setIndex();
+	        }
+	    }
+
+	    _parseTpl(template, map) {
+	        return template.replace(/\$\{.+?}/g, (match) => {
+	            const path = match.substr(2, match.length - 3).trim();
+	            return path.split('.').reduce((res, key) => res[key], map);
+	        });
+	    }
+
+	    //send ajax, return Promise
+	    _jget(url) {
+	        return new Promise(function(resolve, reject) {
+	            let req = new XMLHttpRequest();
+	            req.open('GET', url, true);
+	            req.responseType = 'json';
+	            req.onload = function() {
+	                if (req.status == 200) {
+	                    resolve(req.response);
+	                }
+	                else {
+	                    reject(Error(req.statusText));
+	                }
+	            };
+	            req.onerror = function() {
+	                reject(Error("Network Error"));
+	            };
+	            req.send();
+	        });
+	    }
+	    
+	    _addImgPreloader() {
 	        if (this.imgPreload) {
 	            this.$element.find('img[data-src]').each(function() {
 	                $(this).attr('src',$(this).data('src'));
@@ -67,8 +123,6 @@
 	        } else {
 	            this._addEvent("onLoad");
 	        }
-
-	        this._setIndex();
 	    }
 
 	    _addEvent(e_name) {
@@ -87,6 +141,8 @@
 	    }
 
 	    _setIndex() {
+	        this._maxIndex=this.$element.find(this._indexElement).length;
+
 	        this.$element.find(">li").removeClass('bycurrent');
 	        this.$element.find(">li").removeClass('bynext');
 	        this.$element.find(">li").removeClass('byprev');
