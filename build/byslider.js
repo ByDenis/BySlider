@@ -41,7 +41,6 @@
 	 */
 	class Slider {
 	    constructor(element, options) {
-	        console.log("init");
 	        this.npShow=options.npshow || 2;
 	        this.isClear=options.isсlear || false;
 	        this.imgPreload=options.imgpreload || true;
@@ -73,15 +72,11 @@
 	                },
 	                error => {
 	                    console.error(error);
-
-	                    this._addImgPreloader();
-	                    this._setIndex();
 	                }
 	            );
-	        } else {
-	            this._addImgPreloader();
-	            this._setIndex();
 	        }
+	        this._addImgPreloader();
+	        this._setIndex();
 	    }
 
 	    _parseTpl(template, map) {
