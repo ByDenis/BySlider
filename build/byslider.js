@@ -41,6 +41,7 @@
 	 */
 	class Slider {
 	    constructor(element, options) {
+	        console.log("init");
 	        this.npShow=options.npshow || 2;
 	        this.isClear=options.isсlear || false;
 	        this.imgPreload=options.imgpreload || true;
@@ -49,7 +50,6 @@
 	        this._cIndex=0;
 	        this._indexElement=">li:not('.byhide')";
 
-	        console.log(this.isClear);
 	        this._jpattern=options.jpattern || "<li>undefined</li>";
 	        
 	        $('[data-byslider]').on("click",(e)=>{
@@ -174,13 +174,11 @@
 
 	    next(e) {
 	        this._increment(1);
-	        
 	        this._addEvent("onNext");
 	    }
 
 	    prev(e) {
 	        this._increment(-1);
-	        
 	        this._addEvent("onPrev");
 	    }
 	    
