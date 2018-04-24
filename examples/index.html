@@ -3,56 +3,61 @@
 <head>
     <title>demo</title>
     <meta charset="utf-8">
+	<link href="./_css/slider.css" type="text/css" rel="stylesheet"/>
     <script src="./_js/jquery.js"></script>
     <script src="../build/byslider.js"></script>
-    <style>
-    </style>
 </head>
 <body>
+<!--     
     <a data-byslider="filt" data-type='all' href="#filt1">all show</a>
     <a data-byslider="filt" data-type='1' href="#filt1">filt1</a>
     <a data-byslider="filt" data-type='2' href="#filt2">filt2</a>
-    <a data-byslider="filt" data-type='3' href="#filt3">filt3</a>
+    <a data-byslider="filt" data-type='3' href="#filt3">filt3</a> -->
 
-    <a data-byslider="next" href="#next">next</a>
-    <a data-byslider="prev" href="#prev">prev</a>
-  
-    <ul data-npshow="3" data-byslider="init" id="bySlider" data-jload="byslider.json" data-jpattern="<li data-type='${type}'><div class='slide'><p>${title}</p><img data-src='${img}' src=''></div></li>">
-        <li data-type="1">
-            <div class="slide">
-                <p>1</p>
-                <img data-src="https://www.degoudreinet.nl/uploads/img/afbeelding_27-01-2016_10-28_385x383.jpg" src='' />
-            </div>
-        </li>
-        
-        <li data-type="3">
-            <div class="slide">
-                <p>6</p> 
-            </div>
-        </li>
-        <li data-type="3">
-            <div class="slide">
-                <p>7</p> 
-            </div>
-        </li>
-        <li data-type="3">
-            <div class="slide">
-                <p>8</p> 
-            </div>
-        </li>
-        <li data-type="3">
-            <div class="slide">
-                <p>9</p> 
-            </div>
-        </li>
-    </ul>
+<div class="bg"></div>
+<div class="bg"></div>
+<div class="bg"></div>
+    <div style="position: relative; top:2vw; margin-left: auto; margin-right: auto; max-width: 48vw; height: 27vw;">
+        <div class="byNavs">
+            <a data-byslider="next" class="byNext" href="#next">
+                <svg width="10" height="28" viewBox="0 0 10 28">
+                    <path fill="#ff3300" d="M9.297 15q0 0.203-0.156 0.359l-7.281 7.281q-0.156 0.156-0.359 0.156t-0.359-0.156l-0.781-0.781q-0.156-0.156-0.156-0.359t0.156-0.359l6.141-6.141-6.141-6.141q-0.156-0.156-0.156-0.359t0.156-0.359l0.781-0.781q0.156-0.156 0.359-0.156t0.359 0.156l7.281 7.281q0.156 0.156 0.156 0.359z"></path>
+                </svg>
+            </a>
+            <a data-byslider="prev" class="byPrev" href="#prev">
+                <svg width="10" height="28" viewBox="0 0 10 28">
+                    <path fill="#ff3300" d="M9.797 8.5q0 0.203-0.156 0.359l-6.141 6.141 6.141 6.141q0.156 0.156 0.156 0.359t-0.156 0.359l-0.781 0.781q-0.156 0.156-0.359 0.156t-0.359-0.156l-7.281-7.281q-0.156-0.156-0.156-0.359t0.156-0.359l7.281-7.281q0.156-0.156 0.359-0.156t0.359 0.156l0.781 0.781q0.156 0.156 0.156 0.359z"></path>
+                </svg>
+            </a>
+        </div>
+        <ul data-npshow="3" data-byslider="init" id="bySlider" data-jload="byslider.json" data-jpattern="<li data-type='${type}'><div class='slide'><p>${title}</p><img data-src='${img}' src=''></div></li>"></ul>
+    </div>   
+
+
     <script>
         $('#bySlider').on("onLoad",function() {
           
         });
         $('#bySlider').on("onNext",function() {
-            
+            setTimeout(function() {
+                set_bg_img();
+            },500);
         });
+        $('#bySlider').on("onPrev",function() {
+            setTimeout(function() {
+                set_bg_img();
+            },500);
+        });
+        function set_bg_img() {
+            var _src=$(".bycurrent img").prop("src");
+            $("body .bg").eq(1).css("background-image","url("+ _src +")").addClass("show");
+            $("body .bg").eq(0).addClass("hide");
+
+            setTimeout(function() {
+                $("body .bg").eq(0).css("background-image","url("+ _src +")").addClass("show");
+                $("body .bg").removeClass("show").removeClass("hide");
+            }, 1500);
+        }
         $('ul[data-byslider="init"]').bySlider();
 
     </script>
