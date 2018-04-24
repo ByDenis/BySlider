@@ -6,11 +6,11 @@ body .bg {
     left:-5%;
     position: fixed;
     background-color: #fff; 
-
+    background-size:cover; 
+    background-repeat: no-repeat;
 }
 body .bg:nth-child(1) {
-    background-size:transparent; 
-    background-repeat: no-repeat;
+    
     background-image: url("../slides/001.jpg");
     opacity:1;
     filter: blur(10px);
