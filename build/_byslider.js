@@ -6,7 +6,7 @@
 
 	$ = $ && $.hasOwnProperty('default') ? $['default'] : $;
 
-	function plugin(pluginName, className) {
+	function plugin(pluginName, className, shortHand = false) {
 	    let dataName = `__${pluginName}`;
 	    let old = $.fn[pluginName];
 
@@ -27,6 +27,10 @@
 	        });
 	    };
 
+	    // - Short hand
+	    if (shortHand) {
+	        $[pluginName] = (options) => $({})[pluginName](options);
+	    }
 
 	    // - No conflict
 	    $.fn[pluginName].noConflict = () => $.fn[pluginName] = old;
@@ -46,7 +50,6 @@
 	        this._indexElement=">li:not('.byhide')";
 
 	        this._jpattern=options.jpattern || "<li>undefined</li>";
-	        this._jpattern1=options.jpattern1 || "<li>undefined</li>";
 	        
 	        $('[data-byslider]').on("click",(e)=>{
 	            let $this = $(e.currentTarget);
@@ -60,12 +63,8 @@
 	            this._jget(options.jload).then(
 	                result => {
 	                    if (this.isClear) $('[data-byslider=init]').html("");
-	                    $(result).each((index,elemnt) => {
-	                        if(typeof elemnt.url=="undefined" || elemnt.url=="") {
-	                            $('[data-byslider=init]').append(this._parseTpl(this._jpattern1,elemnt));
-	                        } else {
-	                            $('[data-byslider=init]').append(this._parseTpl(this._jpattern,elemnt));
-	                        }
+	                    $(result).each((byslider_index,byslider_elemnt) => {
+	                        $('ul[data-byslider=init]').append(this._parseTpl(this._jpattern,byslider_elemnt));
 	                    });
 	                    
 	                    this._addImgPreloader();

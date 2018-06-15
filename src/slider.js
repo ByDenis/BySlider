@@ -14,6 +14,7 @@ class Slider {
         this._indexElement=">li:not('.byhide')";
 
         this._jpattern=options.jpattern || "<li>undefined</li>";
+        this._jpattern1=options.jpattern1 || "<li>undefined</li>";
         
         $('[data-byslider]').on("click",(e)=>{
             let $this = $(e.currentTarget);
@@ -28,7 +29,11 @@ class Slider {
                 result => {
                     if (this.isClear) $('[data-byslider=init]').html("");
                     $(result).each((index,elemnt) => {
-                        $('[data-byslider=init]').append(this._parseTpl(this._jpattern,elemnt));
+                        if(typeof elemnt.url=="undefined" || elemnt.url=="") {
+                            $('[data-byslider=init]').append(this._parseTpl(this._jpattern1,elemnt));
+                        } else {
+                            $('[data-byslider=init]').append(this._parseTpl(this._jpattern,elemnt));
+                        }
                     });
                     
                     this._addImgPreloader();

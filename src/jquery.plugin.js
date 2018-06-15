@@ -1,6 +1,6 @@
 import $ from 'jquery';
 
-export default function plugin(pluginName, className, shortHand = false) {
+export default function plugin(pluginName, className) {
     let dataName = `__${pluginName}`;
     let old = $.fn[pluginName];
 
@@ -21,10 +21,6 @@ export default function plugin(pluginName, className, shortHand = false) {
         });
     };
 
-    // - Short hand
-    if (shortHand) {
-        $[pluginName] = (options) => $({})[pluginName](options);
-    }
 
     // - No conflict
     $.fn[pluginName].noConflict = () => $.fn[pluginName] = old;
