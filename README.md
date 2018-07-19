@@ -1,2 +1,2 @@
 # BySlider
-<a href="http://bydenis.com/byslider/">demo</a>
+<a target="_blank" href="http://bydenis.com/byslider/">demo</a>
